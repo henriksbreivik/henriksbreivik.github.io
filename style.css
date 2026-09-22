@@ -1,0 +1,519 @@
+/* ==========================================================================
+   Henrik — personal site
+   Dark, code-editor inspired theme
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #0d1117;
+  --bg-alt: #12181f;
+  --surface: #161b22;
+  --border: #2a313c;
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --accent: #2dd4bf;
+  --accent-soft: rgba(45, 212, 191, 0.12);
+  --accent-2: #e3b341;
+  --header-bg: rgba(13, 17, 23, 0.85);
+  --placeholder-bg: #30363d;
+  --btn-primary-text: #04201c;
+
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --container-width: 1080px;
+  --radius: 10px;
+}
+
+/*
+  Theme resolution order:
+  1. Explicit choice from the dropdown, stored as [data-theme="light"|"dark"|"90s"] — always wins.
+  2. Otherwise ("standard", no attribute set), the OS/browser's prefers-color-scheme setting.
+  3. Otherwise (no preference detected), dark — the :root defaults above.
+*/
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg: #ffffff;
+    --bg-alt: #f6f8fa;
+    --surface: #f6f8fa;
+    --border: #d0d7de;
+    --text: #1b1f24;
+    --text-dim: #57606a;
+    --accent: #0f9d8c;
+    --accent-soft: rgba(15, 157, 140, 0.1);
+    --accent-2: #9a6700;
+    --header-bg: rgba(255, 255, 255, 0.85);
+    --placeholder-bg: #d0d7de;
+  }
+}
+
+:root[data-theme='light'] {
+  --bg: #ffffff;
+  --bg-alt: #f6f8fa;
+  --surface: #f6f8fa;
+  --border: #d0d7de;
+  --text: #1b1f24;
+  --text-dim: #57606a;
+  --accent: #0f9d8c;
+  --accent-soft: rgba(15, 157, 140, 0.1);
+  --accent-2: #9a6700;
+  --header-bg: rgba(255, 255, 255, 0.85);
+  --placeholder-bg: #d0d7de;
+}
+
+/*
+  90s mode — placeholder, no rules yet. [data-theme="90s"] falls through to the
+  dark :root defaults above for now; come back and give this its own Y2K look later.
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.dim {
+  color: var(--text-dim);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ---------------------------- Header / nav ---------------------------- */
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: var(--header-bg);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  gap: 24px;
+}
+
+.logo {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.nav-links a {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--text-dim);
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.nav-links a.active {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.theme-toggle {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  min-width: 132px;
+  padding: 8px 30px 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%238b949e' stroke-width='1.5'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 11px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: none;
+}
+
+.theme-toggle option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* -------------------------------- Main -------------------------------- */
+
+main {
+  min-height: calc(100vh - 250px);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.9rem;
+  margin: 0 0 12px;
+}
+
+.eyebrow::before {
+  content: '// ';
+  color: var(--text-dim);
+}
+
+/* --------------------------------- Hero -------------------------------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 56px;
+  align-items: center;
+  padding: 72px 24px 64px;
+}
+
+.hero h1 {
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink-cursor 1s step-end infinite;
+}
+
+@keyframes blink-cursor {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  margin: 0 0 24px;
+}
+
+.lead {
+  font-size: 1.05rem;
+  color: var(--text);
+  max-width: 60ch;
+  margin: 0 0 32px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.todo {
+  color: var(--accent-2);
+  font-weight: 700;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.social-links a {
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 2px;
+}
+
+.social-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #04201c;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  background: #3ee0c9;
+}
+
+.btn-ghost {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+}
+
+.placeholder-img {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+  background: var(--placeholder-bg);
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+
+/* ------------------------------ Link cards ----------------------------- */
+
+.section-heading {
+  padding: 0 24px;
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+.section-heading h2 {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  margin: 0 0 32px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 0 24px 80px;
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+.card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.card h3 {
+  font-family: var(--font-mono);
+  font-size: 1.02rem;
+  margin: 0 0 8px;
+  color: var(--accent-2);
+}
+
+.card p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.92rem;
+}
+
+/* --------------------------- Simple page body --------------------------- */
+
+.page-body {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 72px 24px 96px;
+}
+
+.page-body h1 {
+  font-family: var(--font-mono);
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  margin: 0 0 20px;
+}
+
+.page-body p {
+  max-width: 65ch;
+  color: var(--text-dim);
+}
+
+.page-body section + section {
+  margin-top: 40px;
+}
+
+.page-body h2 {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--accent-2);
+  margin: 0 0 12px;
+}
+
+.page-body > .btn {
+  margin-bottom: 40px;
+}
+
+.timeline-item {
+  margin-bottom: 20px;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 16px;
+}
+
+.timeline-header h3 {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  margin: 0;
+  color: var(--text);
+}
+
+.timeline-item p {
+  margin: 4px 0 0;
+}
+
+.skills-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skills-list li {
+  font-size: 0.98rem;
+  color: var(--text-dim);
+}
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent-2);
+  background: rgba(227, 179, 65, 0.1);
+  border: 1px solid rgba(227, 179, 65, 0.3);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+
+/* -------------------------------- Footer -------------------------------- */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 0;
+}
+
+.site-footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: space-between;
+  color: var(--text-dim);
+  font-size: 0.88rem;
+}
+
+/* ------------------------------ Responsive ------------------------------ */
+
+@media (max-width: 800px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 48px;
+  }
+
+  .hero-image {
+    order: -1;
+  }
+
+  .placeholder-img {
+    max-width: 180px;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .nav-links {
+    width: 100%;
+  }
+}

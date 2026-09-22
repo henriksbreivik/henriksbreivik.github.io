@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Henrik — CV</title>
+  <script>
+    (function () {
+      var stored = localStorage.getItem('theme');
+      if (stored === 'light' || stored === 'dark' || stored === '90s') {
+        document.documentElement.setAttribute('data-theme', stored);
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="Index.html" class="logo">&lt;Henrik<span class="accent"> /</span>&gt;</a>
+      <ul class="nav-links">
+        <li><a href="Index.html">Hjem</a></li>
+        <li><a href="Cv.html" class="active">CV</a></li>
+        <li><a href="Prosjekter.html">Prosjekter</a></li>
+        <li><a href="Kontakt.html">Kontakt</a></li>
+      </ul>
+      <select id="theme-toggle" class="theme-toggle" aria-label="Velg tema">
+        <option value="standard">🖥️ Standard</option>
+        <option value="light">☀️ Lys</option>
+        <option value="dark">🌙 Mørk</option>
+        <option value="90s">💾 90s</option>
+      </select>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-body">
+      <h1 aria-label="CV"><span class="typed-text" aria-hidden="true">CV</span><span class="cursor accent" aria-hidden="true">_</span></h1>
+      <p class="lead">
+        Masterstudent i programvareutvikling ved UiB &amp; HVL, med en bachelorgrad i informatikk
+        (datateknologi) fra UiB. <strong class="todo">[legg til en setning om hva slags arbeid/rolle du søker]</strong>
+      </p>
+      <a href="#" class="btn btn-ghost todo">[legg ved lenke til CV som PDF]</a>
+
+      <section>
+        <h2>Utdanning</h2>
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <h3>Master i programvareutvikling</h3>
+            <span class="mono dim">August 2026–dags dato</span>
+          </div>
+          <p class="dim">Universitetet i Bergen &amp; Høgskulen på Vestlandet</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <h3>Bachelor i informatikk – datateknologi</h3>
+            <span class="mono dim">August 2023–Juni 2026</span>
+          </div>
+          <p class="dim">Universitetet i Bergen</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Erfaring</h2>
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <h3>Kundekonsulent</h3>
+            <span class="mono dim">April 2018–dags dato</span>
+          </div>
+          <p class="dim">Tafjord Connect</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <h3>Vaktgardist</h3>
+            <span class="mono dim">Januar 2021–Januar 2022</span>
+          </div>
+          <p class="dim">Hans Majestet Kongens Garde</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Ferdigheter</h2>
+        <p class="dim todo">[fyll inn ferdigheter senere]</p>
+      </section>
+
+      <section>
+        <h2>Språk</h2>
+        <ul class="skills-list">
+          <li><strong>Norsk</strong> — morsmål</li>
+          <li><strong>Engelsk</strong> — flytende</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span class="mono">Henrik &copy; 2026</span>
+      <span class="mono dim">Bygget med HTML, CSS og 100% vibe-coding ¯\_(ツ)_/¯</span>
+    </div>
+  </footer>
+
+  <script src="theme.js" defer></script>
+  <script src="typewriter.js" defer></script>
+</body>
+</html>
