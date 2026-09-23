@@ -7,7 +7,7 @@
   <script>
     (function () {
       var stored = localStorage.getItem('theme');
-      if (stored === 'light' || stored === 'dark' || stored === '90s') {
+      if (stored === 'light' || stored === 'dark') {
         document.documentElement.setAttribute('data-theme', stored);
       }
     })();
@@ -25,12 +25,17 @@
         <li><a href="Prosjekter.html">Prosjekter</a></li>
         <li><a href="Kontakt.html">Kontakt</a></li>
       </ul>
-      <select id="theme-toggle" class="theme-toggle" aria-label="Velg tema">
-        <option value="standard">🖥️ Standard</option>
-        <option value="light">☀️ Lys</option>
-        <option value="dark">🌙 Mørk</option>
-        <option value="90s">💾 90s</option>
-      </select>
+      <div class="theme-toggle" id="theme-toggle">
+        <button type="button" class="theme-toggle-btn" aria-haspopup="listbox" aria-expanded="false">
+          <span class="theme-icon"><img src="images/theme-auto.svg" alt=""></span>
+          <span class="theme-toggle-label">Standard</span>
+        </button>
+        <ul class="theme-menu" role="listbox" aria-label="Velg tema" hidden>
+          <li role="option" data-theme="standard" data-label="Standard"><span class="theme-icon"><img src="images/theme-auto.svg" alt=""></span>Standard</li>
+          <li role="option" data-theme="light" data-label="Lys"><span class="theme-icon"><img src="images/sun.svg" alt=""></span>Lys</li>
+          <li role="option" data-theme="dark" data-label="Mørk"><span class="theme-icon"><img src="images/moon.svg" alt=""></span>Mørk</li>
+        </ul>
+      </div>
     </nav>
   </header>
 
@@ -40,15 +45,16 @@
         <h1 aria-label="Henrik Sætre Breivik"><span id="typed-name" class="typed-text" aria-hidden="true">Henrik Sætre Breivik</span><span class="cursor accent" aria-hidden="true">_</span></h1>
         <p class="subtitle">Masterstudent i programvareutvikling <span class="dim">@ UiB &amp; HVL</span></p>
         <p class="lead">
-          Hei og velkommen til nettsiden min! Jeg heter Henrik og studerer for tiden på det
-          felles masterprogrammet i programvareutvikling ved Universitetet i Bergen og Høgskulen på Vestlandet.
-          Jeg har tidligere fullført en bachelorgrad i informatikk med spesialisering i datateknologi ved Universitetet i Bergen.
-          På denne siden finner du et utvalg av prosjektene jeg har arbeidet med, både i forbindelse med studiene og på fritiden, samt litt informasjon om meg.
+          Hei, og velkommen til nettsiden min! Målet med siden er å gi en samlet oversikt over CV-en min, sideprosjektene mine og annen relevant informasjon om meg.
+          Nettsiden er også et læringsprosjekt: jeg har bygget den med hjelp fra min gode venn Claude for å bli bedre kjent med HTML, CSS og bruk av AI-verktøy direkte i kodeeditoren. Takk for at du tar en titt!
         </p>
-        <div class="social-links">
-          <a href="https://github.com/henriksbreivik" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.linkedin.com/in/henrik-s%C3%A6tre-breivik-508486422/" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
+
+        <h2>Litt om meg</h2>
+        <p>
+          Jeg heter Henrik, er <span id="age"></span> år og bor i Bergen. For tiden tar jeg en master i
+          programvareutvikling, et fellesprogram mellom UiB og HVL.
+        </p>
+        <p class="dim todo">[fortsett å skrive litt om deg selv her]</p>
       </div>
       <div class="hero-image">
         <div class="placeholder-img" role="img" aria-label="Bilde av Henrik kommer snart"></div>
@@ -58,12 +64,13 @@
 
   <footer class="site-footer">
     <div class="container">
-      <span class="mono">Henrik &copy; 2026</span>
+      <span class="mono">Henrik Sætre Breivik | 2026</span>
       <span class="mono dim">Bygget med HTML, CSS og 100% vibe-coding ¯\_(ツ)_/¯</span>
     </div>
   </footer>
 
   <script src="theme.js" defer></script>
   <script src="typewriter.js" defer></script>
+  <script src="age.js" defer></script>
 </body>
 </html>

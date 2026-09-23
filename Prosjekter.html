@@ -7,7 +7,7 @@
   <script>
     (function () {
       var stored = localStorage.getItem('theme');
-      if (stored === 'light' || stored === 'dark' || stored === '90s') {
+      if (stored === 'light' || stored === 'dark') {
         document.documentElement.setAttribute('data-theme', stored);
       }
     })();
@@ -25,12 +25,17 @@
         <li><a href="Prosjekter.html" class="active">Prosjekter</a></li>
         <li><a href="Kontakt.html">Kontakt</a></li>
       </ul>
-      <select id="theme-toggle" class="theme-toggle" aria-label="Velg tema">
-        <option value="standard">🖥️ Standard</option>
-        <option value="light">☀️ Lys</option>
-        <option value="dark">🌙 Mørk</option>
-        <option value="90s">💾 90s</option>
-      </select>
+      <div class="theme-toggle" id="theme-toggle">
+        <button type="button" class="theme-toggle-btn" aria-haspopup="listbox" aria-expanded="false">
+          <span class="theme-icon"><img src="images/theme-auto.svg" alt=""></span>
+          <span class="theme-toggle-label">Standard</span>
+        </button>
+        <ul class="theme-menu" role="listbox" aria-label="Velg tema" hidden>
+          <li role="option" data-theme="standard" data-label="Standard"><span class="theme-icon"><img src="images/theme-auto.svg" alt=""></span>Standard</li>
+          <li role="option" data-theme="light" data-label="Lys"><span class="theme-icon"><img src="images/sun.svg" alt=""></span>Lys</li>
+          <li role="option" data-theme="dark" data-label="Mørk"><span class="theme-icon"><img src="images/moon.svg" alt=""></span>Mørk</li>
+        </ul>
+      </div>
     </nav>
   </header>
 
@@ -40,25 +45,43 @@
 
       <section>
         <h2>Skoleprosjekter</h2>
-        <p>
-          Her kommer snart en samling av prosjekter fra bachelorstudiet i informatikk
-          og det pågående masterstudiet i programvareutvikling.
-        </p>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-card-image todo">[bilde]</div>
+            <h3 class="todo">[prosjektnavn]</h3>
+            <p class="dim todo">[kort beskrivelse av prosjektet]</p>
+          </article>
+          <article class="project-card">
+            <div class="project-card-image todo">[bilde]</div>
+            <h3 class="todo">[prosjektnavn]</h3>
+            <p class="dim todo">[kort beskrivelse av prosjektet]</p>
+          </article>
+        </div>
+        <p class="dim todo">[legg til flere kort etter samme mal ved behov]</p>
       </section>
 
       <section>
         <h2>Egne prosjekter</h2>
-        <p>
-          Her kommer snart en samling av ting jeg har bygget på fritiden,
-          utenfor studiene.
-        </p>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-card-image todo">[bilde]</div>
+            <h3 class="todo">[prosjektnavn]</h3>
+            <p class="dim todo">[kort beskrivelse av prosjektet]</p>
+          </article>
+          <article class="project-card">
+            <div class="project-card-image todo">[bilde]</div>
+            <h3 class="todo">[prosjektnavn]</h3>
+            <p class="dim todo">[kort beskrivelse av prosjektet]</p>
+          </article>
+        </div>
+        <p class="dim todo">[legg til flere kort etter samme mal ved behov]</p>
       </section>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <span class="mono">Henrik &copy; 2026</span>
+      <span class="mono">Henrik Sætre Breivik | 2026</span>
       <span class="mono dim">Bygget med HTML, CSS og 100% vibe-coding ¯\_(ツ)_/¯</span>
     </div>
   </footer>
